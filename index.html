@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder X Co — Final Assessment | Social Media Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --yellow: #F5C518;
+    --white: #FFFFFF;
+    --light: #F4F6FA;
+    --gray: #6B7280;
+    --mid: #E5E7EB;
+    --dark: #1E293B;
+    --green: #16A34A;
+    --red: #DC2626;
+    --orange: #F59E0B;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  .site-header {
+    background: var(--navy);
+    border-bottom: 4px solid var(--yellow);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .site-header .logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--yellow);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+  .site-header .badge {
+    background: rgba(245,197,24,0.12);
+    color: var(--yellow);
+    border: 1px solid rgba(245,197,24,0.3);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 100px;
+    text-transform: uppercase;
+  }
+
+  /* ─── PROGRESS ─── */
+  .progress-bar-wrap {
+    background: var(--navy);
+    height: 4px;
+    position: sticky;
+    top: 64px;
+    z-index: 99;
+  }
+  .progress-bar {
+    height: 4px;
+    background: var(--yellow);
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, #0d1f40 100%);
+    color: white;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(245,197,24,0.03) 40px, rgba(245,197,24,0.03) 80px
+    );
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--yellow);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.05;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  .hero h1 span { color: var(--yellow); }
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    position: relative;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .stat { text-align: center; }
+  .stat .num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--yellow);
+  }
+  .stat .lbl { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; text-transform: uppercase; }
+
+  /* ─── STEPS ─── */
+  .steps-nav {
+    display: flex;
+    gap: 0;
+    background: white;
+    border-bottom: 2px solid var(--mid);
+    overflow-x: auto;
+    position: sticky;
+    top: 68px;
+    z-index: 98;
+  }
+  .step-tab {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.9rem 0.5rem;
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    border: none;
+    background: none;
+  }
+  .step-tab.active { color: var(--navy); border-bottom: 3px solid var(--yellow); background: var(--light); }
+  .step-tab.completed { color: var(--green); }
+  .step-tab .step-num {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 2px;
+  }
+
+  /* ─── FORM SECTIONS ─── */
+  .form-section { display: none; max-width: 780px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  .form-section.visible { display: block; }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 0.25rem;
+  }
+  .section-subtitle { font-size: 0.95rem; color: var(--gray); margin-bottom: 2rem; line-height: 1.5; }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--mid);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card-title .icon { font-size: 1.2rem; }
+
+  /* ─── FIELDS ─── */
+  .field-group { margin-bottom: 1.25rem; }
+  label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.02em;
+  }
+  label .req { color: var(--red); margin-left: 2px; }
+  input[type="text"], input[type="email"], input[type="number"], textarea, select {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1.5px solid var(--mid);
+    border-radius: 8px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    color: var(--dark);
+    background: white;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(10,22,40,0.08);
+  }
+  textarea { resize: vertical; min-height: 90px; }
+
+  /* ─── RATING STARS ─── */
+  .rating-row { display: flex; align-items: center; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px solid var(--mid); }
+  .rating-row:last-child { border-bottom: none; }
+  .rating-label { font-size: 0.9rem; font-weight: 500; }
+  .stars { display: flex; gap: 4px; }
+  .star-btn {
+    width: 32px; height: 32px;
+    background: none; border: 2px solid var(--mid);
+    border-radius: 50%; cursor: pointer; font-size: 0.8rem;
+    font-weight: 700; color: var(--gray); transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+  .star-btn.selected { background: var(--yellow); border-color: var(--yellow); color: var(--navy); }
+
+  /* ─── LIKERT SCALE ─── */
+  .likert-question { margin-bottom: 1.5rem; }
+  .likert-q { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.6rem; }
+  .likert-options { display: flex; gap: 6px; flex-wrap: wrap; }
+  .likert-btn {
+    flex: 1; min-width: 70px; padding: 0.5rem 0.3rem;
+    border: 1.5px solid var(--mid); border-radius: 8px;
+    background: white; cursor: pointer; text-align: center;
+    font-size: 0.75rem; font-weight: 600; color: var(--gray);
+    transition: all 0.15s; font-family: 'Barlow', sans-serif;
+  }
+  .likert-btn:hover { border-color: var(--navy); color: var(--navy); }
+  .likert-btn.selected { background: var(--navy); border-color: var(--navy); color: var(--yellow); }
+  .likert-scale-labels { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--gray); margin-top: 4px; }
+
+  /* ─── SCENARIO CARDS ─── */
+  .scenario-card { margin-bottom: 1.25rem; }
+  .scenario-prompt {
+    background: var(--light); border-left: 4px solid var(--yellow);
+    padding: 0.9rem 1rem; border-radius: 0 8px 8px 0;
+    font-size: 0.9rem; color: var(--dark); margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+
+  /* ─── PSYCH TEST ─── */
+  .psych-intro {
+    background: linear-gradient(135deg, var(--navy), #0d1f40);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .psych-intro h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; color: var(--yellow); margin-bottom: 0.5rem; }
+  .psych-intro p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+  .trait-badge {
+    display: inline-block; font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 100px;
+    margin-bottom: 0.5rem;
+  }
+  .tb-con { background: #EFF6FF; color: #1D4ED8; }
+  .tb-agr { background: #F0FDF4; color: #15803D; }
+  .tb-ope { background: #FDF4FF; color: #7E22CE; }
+  .tb-stb { background: #FFF7ED; color: #C2410C; }
+  .tb-drv { background: #FFF1F2; color: #BE123C; }
+
+  /* ─── NAV BUTTONS ─── */
+  .form-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 2rem; flex-wrap: wrap; gap: 0.75rem;
+  }
+  .btn {
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .btn-primary { background: var(--navy); color: var(--yellow); }
+  .btn-primary:hover { background: #0d1f40; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(10,22,40,0.2); }
+  .btn-secondary { background: white; color: var(--navy); border: 2px solid var(--mid); }
+  .btn-secondary:hover { border-color: var(--navy); }
+  .btn-submit { background: var(--yellow); color: var(--navy); font-size: 1rem; padding: 1rem 2.5rem; }
+  .btn-submit:hover { background: #e6b800; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(245,197,24,0.4); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+  /* ─── AI ANALYSIS ─── */
+  .ai-section {
+    background: white; border-radius: 12px;
+    border: 1px solid var(--mid); overflow: hidden;
+    margin-top: 2rem;
+  }
+  .ai-header {
+    background: var(--navy); padding: 1rem 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .ai-header h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; color: var(--yellow); }
+  .ai-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .ai-body { padding: 1.5rem; }
+  .ai-thinking {
+    display: flex; align-items: center; gap: 0.75rem;
+    color: var(--gray); font-size: 0.9rem;
+  }
+  .ai-thinking .dots span {
+    display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--yellow);
+    animation: bounce 1.2s infinite;
+  }
+  .ai-thinking .dots span:nth-child(2) { animation-delay: 0.2s; }
+  .ai-thinking .dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
+
+  .ai-result { display: none; }
+  .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+  .score-card {
+    border-radius: 10px; padding: 1rem; text-align: center;
+    border: 1px solid var(--mid);
+  }
+  .score-card .s-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.4rem; }
+  .score-card .s-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2.2rem; font-weight: 800; line-height: 1;
+  }
+  .score-card .s-bar { height: 4px; border-radius: 100px; background: var(--mid); margin-top: 0.5rem; overflow: hidden; }
+  .score-card .s-fill { height: 100%; border-radius: 100px; transition: width 0.8s ease; }
+  .verdict-box { border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+  .ai-narrative { font-size: 0.95rem; line-height: 1.7; color: var(--dark); }
+  .ai-narrative strong { color: var(--navy); }
+
+  /* ─── RESULT PAGE ─── */
+  .result-hero {
+    text-align: center; padding: 3rem 1.5rem 2rem;
+    background: linear-gradient(135deg, var(--navy), #0d1f40);
+    color: white; border-radius: 12px; margin-bottom: 1.5rem;
+  }
+  .result-icon { font-size: 4rem; margin-bottom: 1rem; }
+  .result-hero h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 2.5rem; color: var(--yellow); margin-bottom: 0.5rem; }
+  .result-hero p { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+  .result-total {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 5rem; font-weight: 800; color: var(--yellow);
+    line-height: 1; margin: 1rem 0 0.5rem;
+  }
+
+  /* ─── API KEY MODAL ─── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.hidden { display: none; }
+  .modal {
+    background: white; border-radius: 16px;
+    padding: 2rem; max-width: 480px; width: 100%;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+  }
+  .modal h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; color: var(--navy); margin-bottom: 0.5rem; }
+  .modal p { font-size: 0.85rem; color: var(--gray); margin-bottom: 1rem; line-height: 1.6; }
+  .modal input { margin-bottom: 1rem; }
+  .modal-btns { display: flex; gap: 0.75rem; }
+  .api-note { font-size: 0.72rem; color: var(--gray); margin-top: 0.75rem; }
+  .api-note a { color: var(--navy); }
+
+  .info-alert {
+    background: #EFF6FF; border: 1px solid #BFDBFE;
+    border-radius: 8px; padding: 0.75rem 1rem;
+    font-size: 0.8rem; color: #1D4ED8; margin-top: 0.75rem;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 1rem 2.5rem; }
+    .steps-nav { top: 64px; }
+    .step-tab { min-width: 80px; font-size: 0.6rem; }
+    .form-nav { flex-direction: column-reverse; }
+    .btn { width: 100%; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- API KEY MODAL -->
+<div class="modal-overlay" id="apiModal">
+  <div class="modal">
+    <h3>🔑 Enter Your API Key</h3>
+    <p>To power the AI-scored analysis, paste your free Anthropic API key below. Your key stays in your browser only and is never stored or sent anywhere except directly to Anthropic's API.</p>
+    <div class="field-group">
+      <label>Anthropic API Key</label>
+      <input type="text" id="apiKeyInput" placeholder="sk-ant-api03-..." autocomplete="off">
+    </div>
+    <div class="modal-btns">
+      <button class="btn btn-primary" style="flex:1" onclick="saveApiKey()">Save & Continue</button>
+      <button class="btn btn-secondary" onclick="skipApiKey()">Skip AI Scoring</button>
+    </div>
+    <div class="api-note">
+      Get a free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> →
+      API Keys → Create Key. Free tier includes generous credits.
+    </div>
+    <div class="info-alert">
+      💡 Without an API key, all form fields still save normally. AI scoring will be skipped.
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a href="#" class="logo">FOUNDER X CO</a>
+  <span class="badge">Final Assessment</span>
+</header>
+<div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Social Media Manager · Candidate Assessment</p>
+  <h1>Prove You're Ready to <span>Build.</span></h1>
+  <p>This final assessment combines skills evaluation, behavioral profiling, and scenario testing — all scored by AI in real time.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="num">6</div><div class="lbl">Sections</div></div>
+    <div class="stat"><div class="num">~20</div><div class="lbl">Minutes</div></div>
+    <div class="stat"><div class="num">100</div><div class="lbl">Point Scale</div></div>
+    <div class="stat"><div class="num">AI</div><div class="lbl">Scored</div></div>
+  </div>
+</section>
+
+<!-- STEP TABS -->
+<nav class="steps-nav" id="stepsNav">
+  <button class="step-tab active" onclick="goTo(0)"><span class="step-num">01</span>Profile</button>
+  <button class="step-tab" onclick="goTo(1)"><span class="step-num">02</span>Skills</button>
+  <button class="step-tab" onclick="goTo(2)"><span class="step-num">03</span>Scenarios</button>
+  <button class="step-tab" onclick="goTo(3)"><span class="step-num">04</span>Psych</button>
+  <button class="step-tab" onclick="goTo(4)"><span class="step-num">05</span>Values</button>
+  <button class="step-tab" onclick="goTo(5)"><span class="step-num">06</span>Results</button>
+</nav>
+
+<!-- ─── SECTION 01: PROFILE ─── -->
+<section class="form-section visible" id="sec0">
+  <div class="section-title">Candidate Profile</div>
+  <div class="section-subtitle">Tell us who you are. All fields are required to process your application.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">👤</span> Personal Information</div>
+    <div class="field-group">
+      <label>Full Name <span class="req">*</span></label>
+      <input type="text" id="p_name" placeholder="Your full legal name">
+    </div>
+    <div class="field-group">
+      <label>Email Address <span class="req">*</span></label>
+      <input type="email" id="p_email" placeholder="your@email.com">
+    </div>
+    <div class="field-group">
+      <label>Location (City, Country)</label>
+      <input type="text" id="p_location" placeholder="e.g. Manila, Philippines">
+    </div>
+    <div class="field-group">
+      <label>How did you find out about this program?</label>
+      <select id="p_source">
+        <option value="">Select one...</option>
+        <option>TikTok</option>
+        <option>Instagram</option>
+        <option>YouTube</option>
+        <option>Referred by a friend</option>
+        <option>Whop platform</option>
+        <option>Other</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">📱</span> Social Media Handles</div>
+    <div class="field-group">
+      <label>TikTok Username</label>
+      <input type="text" id="p_tiktok" placeholder="@yourhandle">
+    </div>
+    <div class="field-group">
+      <label>Instagram Username</label>
+      <input type="text" id="p_instagram" placeholder="@yourhandle">
+    </div>
+    <div class="field-group">
+      <label>YouTube Channel</label>
+      <input type="text" id="p_youtube" placeholder="Channel name or URL">
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">⏱</span> Availability</div>
+    <div class="field-group">
+      <label>How many hours per week can you dedicate to this program? <span class="req">*</span></label>
+      <select id="p_hours">
+        <option value="">Select...</option>
+        <option>Less than 10 hours</option>
+        <option>10–20 hours</option>
+        <option>20–30 hours</option>
+        <option>30–40 hours</option>
+        <option>Full-time (40+ hours)</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label>When are you available to start?</label>
+      <select id="p_start">
+        <option value="">Select...</option>
+        <option>Immediately</option>
+        <option>Within 1 week</option>
+        <option>Within 2 weeks</option>
+        <option>Within a month</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-nav">
+    <span></span>
+    <button class="btn btn-primary" onclick="nextSection(0)">Next: Skills Assessment →</button>
+  </div>
+</section>
+
+<!-- ─── SECTION 02: SKILLS ─── -->
+<section class="form-section" id="sec1">
+  <div class="section-title">Skills Assessment</div>
+  <div class="section-subtitle">Rate your proficiency and share your experience. Be honest — we match you to campaigns that fit your level.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">⭐</span> Platform Proficiency (Rate 1–5)</div>
+    <div class="rating-row">
+      <span class="rating-label">TikTok</span>
+      <div class="stars" id="r_tiktok"></div>
+    </div>
+    <div class="rating-row">
+      <span class="rating-label">Instagram Reels</span>
+      <div class="stars" id="r_instagram"></div>
+    </div>
+    <div class="rating-row">
+      <span class="rating-label">YouTube Shorts</span>
+      <div class="stars" id="r_youtube"></div>
+    </div>
+    <div class="rating-row">
+      <span class="rating-label">CapCut / Video Editing</span>
+      <div class="stars" id="r_capcut"></div>
+    </div>
+    <div class="rating-row">
+      <span class="rating-label">Canva / Graphic Design</span>
+      <div class="stars" id="r_canva"></div>
+    </div>
+    <div class="rating-row">
+      <span class="rating-label">Data & Analytics Reading</span>
+      <div class="stars" id="r_analytics"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">💬</span> Open Questions</div>
+    <div class="field-group">
+      <label>Describe your current content creation workflow. What does a typical posting day look like for you? <span class="req">*</span></label>
+      <textarea id="s_workflow" placeholder="Walk us through how you research, create, edit, and post content..."></textarea>
+    </div>
+    <div class="field-group">
+      <label>What is the best-performing piece of content you've made? What made it work? <span class="req">*</span></label>
+      <textarea id="s_bestcontent" placeholder="Describe the content, the numbers, and what you think drove the performance..."></textarea>
+    </div>
+    <div class="field-group">
+      <label>Have you worked on any clipping or affiliate campaigns before? Describe your experience and results.</label>
+      <textarea id="s_clipping" placeholder="If no prior experience, explain how you'd approach your first campaign..."></textarea>
+    </div>
+    <div class="field-group">
+      <label>What editing tools are you currently using and how proficient are you with each?</label>
+      <textarea id="s_tools" placeholder="List your tools and your skill level with each one..."></textarea>
+    </div>
+  </div>
+
+  <div class="form-nav">
+    <button class="btn btn-secondary" onclick="prevSection(1)">← Back</button>
+    <button class="btn btn-primary" onclick="nextSection(1)">Next: Scenario Test →</button>
+  </div>
+</section>
+
+<!-- ─── SECTION 03: SCENARIOS ─── -->
+<section class="form-section" id="sec2">
+  <div class="section-title">Scenario Testing</div>
+  <div class="section-subtitle">These are real situations you might face in this role. There are no perfect answers — we're evaluating your thinking, not your ability to guess what we want to hear.</div>
+
+  <div class="card scenario-card">
+    <div class="card-title"><span class="icon">🎯</span> Scenario 1 — Low Views Week</div>
+    <div class="scenario-prompt">
+      "It's Day 10 of your probation. You've posted 8 clips across TikTok and Instagram Reels but only reached 40,000 total views. You need 1 million by Day 31. What do you do?"
+    </div>
+    <textarea id="sc1" placeholder="Walk us through your specific action plan — what you analyze, what you change, and how you execute..."></textarea>
+  </div>
+
+  <div class="card scenario-card">
+    <div class="card-title"><span class="icon">⚡</span> Scenario 2 — Viral Opportunity</div>
+    <div class="scenario-prompt">
+      "One of your clips unexpectedly hits 500,000 views in 24 hours. You have 3 hours of free time right now. How do you capitalize on this momentum?"
+    </div>
+    <textarea id="sc2" placeholder="Describe exactly what you'd do in those 3 hours and why..."></textarea>
+  </div>
+
+  <div class="card scenario-card">
+    <div class="card-title"><span class="icon">🤝</span> Scenario 3 — Team Conflict</div>
+    <div class="scenario-prompt">
+      "Your assigned video editor consistently delivers clips 2 days late. It's affecting your posting schedule. How do you handle this without escalating to management immediately?"
+    </div>
+    <textarea id="sc3" placeholder="Describe your communication approach, the steps you'd take, and when you'd consider escalating..."></textarea>
+  </div>
+
+  <div class="card scenario-card">
+    <div class="card-title"><span class="icon">📊</span> Scenario 4 — Data Interpretation</div>
+    <div class="scenario-prompt">
+      "Your TikTok clips average 2.5% completion rate. Your Instagram Reels average 68%. Both platforms show similar view counts. What does this tell you, and what do you do with that information?"
+    </div>
+    <textarea id="sc4" placeholder="Interpret the data and describe the content or strategy changes you'd make based on it..."></textarea>
+  </div>
+
+  <div class="form-nav">
+    <button class="btn btn-secondary" onclick="prevSection(2)">← Back</button>
+    <button class="btn btn-primary" onclick="nextSection(2)">Next: Psychology Profile →</button>
+  </div>
+</section>
+
+<!-- ─── SECTION 04: PSYCHOLOGICAL TEST ─── -->
+<section class="form-section" id="sec3">
+  <div class="section-title">Psychological Profile</div>
+  <div class="section-subtitle">Based on the Big Five personality model used by top hiring teams globally. Rate how accurately each statement describes you.</div>
+
+  <div class="psych-intro">
+    <h3>🧠 What This Measures</h3>
+    <p>This assessment evaluates five core traits relevant to your success as a Social Media Manager: <strong>Conscientiousness</strong> (organization, follow-through), <strong>Agreeableness</strong> (team collaboration), <strong>Openness</strong> (creativity, adaptability), <strong>Emotional Stability</strong> (performance under pressure), and <strong>Drive</strong> (initiative, ambition). Answer based on who you are, not who you want to be.</p>
+  </div>
+
+  <div class="card" id="psychCard">
+    <!-- Questions generated by JS -->
+  </div>
+
+  <div class="form-nav">
+    <button class="btn btn-secondary" onclick="prevSection(3)">← Back</button>
+    <button class="btn btn-primary" onclick="nextSection(3)">Next: Values Alignment →</button>
+  </div>
+</section>
+
+<!-- ─── SECTION 05: VALUES ─── -->
+<section class="form-section" id="sec4">
+  <div class="section-title">Values & Commitment</div>
+  <div class="section-subtitle">These final questions help us understand your motivation, mindset, and long-term alignment with Founder X Co's culture.</div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🌟</span> Motivation & Goals</div>
+    <div class="field-group">
+      <label>Why do you want to join this specific program — and not just any content job? <span class="req">*</span></label>
+      <textarea id="v_why" placeholder="Be specific. What about the Founder X Co model appeals to you?"></textarea>
+    </div>
+    <div class="field-group">
+      <label>Where do you see yourself in your content career 12 months from now?</label>
+      <textarea id="v_12mo" placeholder="Paint a picture of where you want to be..."></textarea>
+    </div>
+    <div class="field-group">
+      <label>What is the biggest professional failure you've had, and what did you learn from it? <span class="req">*</span></label>
+      <textarea id="v_failure" placeholder="We value self-awareness. Be honest."></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">⚖️</span> Commitment Check</div>
+
+    <div class="likert-question">
+      <div class="likert-q">I am comfortable with performance-based pay where my income depends entirely on results I produce.</div>
+      <div class="likert-options" id="lk_perf"></div>
+      <div class="likert-scale-labels"><span>Strongly Disagree</span><span>Strongly Agree</span></div>
+    </div>
+    <div class="likert-question">
+      <div class="likert-q">I can commit to posting a minimum of 5 clips per week for the full 31-day probation period.</div>
+      <div class="likert-options" id="lk_commit"></div>
+      <div class="likert-scale-labels"><span>Strongly Disagree</span><span>Strongly Agree</span></div>
+    </div>
+    <div class="likert-question">
+      <div class="likert-q">I understand that this is a business partnership, not an employment relationship, and I accept full responsibility for my output.</div>
+      <div class="likert-options" id="lk_partner"></div>
+      <div class="likert-scale-labels"><span>Strongly Disagree</span><span>Strongly Agree</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">✍️</span> Final Statement</div>
+    <div class="field-group">
+      <label>In 3–5 sentences, make the case for why you should be selected for this program.</label>
+      <textarea id="v_pitch" placeholder="This is your closing argument. Make it count." style="min-height: 120px;"></textarea>
+    </div>
+  </div>
+
+  <div class="form-nav">
+    <button class="btn btn-secondary" onclick="prevSection(4)">← Back</button>
+    <button class="btn btn-submit" onclick="submitAssessment()">🚀 Submit & Get AI Analysis</button>
+  </div>
+</section>
+
+<!-- ─── SECTION 06: RESULTS ─── -->
+<section class="form-section" id="sec5">
+  <div class="section-title">Assessment Results</div>
+  <div class="section-subtitle">Your submission is complete. Here is your AI-generated analysis.</div>
+
+  <div class="ai-section">
+    <div class="ai-header">
+      <div class="ai-dot"></div>
+      <h3>AI Evaluation Engine</h3>
+    </div>
+    <div class="ai-body">
+      <div class="ai-thinking" id="aiThinking">
+        <span>Analyzing your full submission across all dimensions</span>
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+      <div class="ai-result" id="aiResult"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem; text-align:center; padding: 2rem;">
+    <div class="card-title" style="justify-content:center">🎉 Submission Confirmed</div>
+    <p style="color:var(--gray);font-size:0.9rem;margin-bottom:1rem">Your assessment has been recorded. Our team reviews results within 48–72 hours.</p>
+    <p style="color:var(--gray);font-size:0.85rem">Questions? Email <strong>team@founderxco.com</strong></p>
+  </div>
+</section>
+
+<script>
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let currentSection = 0;
+let apiKey = '';
+let ratings = {};
+let psychAnswers = {};
+let likertAnswers = {};
+
+// ─── PSYCH QUESTIONS ─────────────────────────────────────────────────────────
+const psychQuestions = [
+  { id:'p1', trait:'con', label:'tb-con', traitName:'Conscientiousness', q:'I always meet deadlines, even when it requires extra effort.' },
+  { id:'p2', trait:'drv', label:'tb-drv', traitName:'Drive', q:'I consistently set ambitious goals and push myself to achieve them.' },
+  { id:'p3', trait:'agr', label:'tb-agr', traitName:'Agreeableness', q:'I find it easy to collaborate and rarely get into conflicts with teammates.' },
+  { id:'p4', trait:'ope', label:'tb-ope', traitName:'Openness', q:'I enjoy experimenting with new content formats, even if they might not work.' },
+  { id:'p5', trait:'stb', label:'tb-stb', traitName:'Emotional Stability', q:'When a piece of content flops, I bounce back quickly and analyze what went wrong.' },
+  { id:'p6', trait:'con', label:'tb-con', traitName:'Conscientiousness', q:'I maintain detailed records and systems for tracking my work and performance.' },
+  { id:'p7', trait:'drv', label:'tb-drv', traitName:'Drive', q:'I often take initiative without being asked — I spot problems and fix them proactively.' },
+  { id:'p8', trait:'ope', label:'tb-ope', traitName:'Openness', q:'I actively study trends and algorithm changes even in my personal time.' },
+  { id:'p9', trait:'agr', label:'tb-agr', traitName:'Agreeableness', q:'I give and receive feedback professionally, without taking it personally.' },
+  { id:'p10', trait:'stb', label:'tb-stb', traitName:'Emotional Stability', q:'High-pressure deadlines motivate me rather than overwhelm me.' },
+  { id:'p11', trait:'drv', label:'tb-drv', traitName:'Drive', q:'I am not satisfied with "good enough" — I keep optimizing until results are exceptional.' },
+  { id:'p12', trait:'con', label:'tb-con', traitName:'Conscientiousness', q:'I communicate proactively when I anticipate delays or problems.' },
+  { id:'p13', trait:'ope', label:'tb-ope', traitName:'Openness', q:'I am genuinely curious about how the algorithm works and what makes content go viral.' },
+  { id:'p14', trait:'stb', label:'tb-stb', traitName:'Emotional Stability', q:'I can work independently for long stretches without needing external validation or check-ins.' },
+  { id:'p15', trait:'agr', label:'tb-agr', traitName:'Agreeableness', q:'I adapt my communication style to work effectively with different personality types.' },
+];
+
+const LABELS = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
+
+function buildPsychCard() {
+  const card = document.getElementById('psychCard');
+  card.innerHTML = '<div class="card-title"><span class="icon">🧠</span> Personality Statements — Rate Your Agreement</div>';
+  psychQuestions.forEach(q => {
+    const div = document.createElement('div');
+    div.className = 'likert-question';
+    div.innerHTML = `
+      <div style="margin-bottom:4px"><span class="trait-badge ${q.label}">${q.traitName}</span></div>
+      <div class="likert-q">${q.q}</div>
+      <div class="likert-options" id="psych_${q.id}"></div>
+      <div class="likert-scale-labels"><span>Strongly Disagree</span><span>Strongly Agree</span></div>
+    `;
+    card.appendChild(div);
+    LABELS.forEach((lbl, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'likert-btn';
+      btn.textContent = i + 1;
+      btn.title = lbl;
+      btn.onclick = () => {
+        document.querySelectorAll(`#psych_${q.id} .likert-btn`).forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        psychAnswers[q.id] = { value: i + 1, trait: q.trait, q: q.q };
+      };
+      document.getElementById(`psych_${q.id}`).appendChild(btn);
+    });
+  });
+}
+
+function buildLikert(containerId, id) {
+  const container = document.getElementById(containerId);
+  LABELS.forEach((lbl, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'likert-btn';
+    btn.textContent = lbl;
+    btn.onclick = () => {
+      container.querySelectorAll('.likert-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      likertAnswers[id] = i + 1;
+    };
+    container.appendChild(btn);
+  });
+}
+
+function buildRatings() {
+  ['r_tiktok','r_instagram','r_youtube','r_capcut','r_canva','r_analytics'].forEach(id => {
+    const container = document.getElementById(id);
+    for (let i = 1; i <= 5; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'star-btn';
+      btn.textContent = i;
+      btn.onclick = () => {
+        container.querySelectorAll('.star-btn').forEach(b => b.classList.remove('selected'));
+        for (let j = 0; j < i; j++) container.children[j].classList.add('selected');
+        ratings[id] = i;
+      };
+      container.appendChild(btn);
+    }
+  });
+}
+
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+function goTo(idx) {
+  document.querySelectorAll('.form-section').forEach((s, i) => {
+    s.classList.toggle('visible', i === idx);
+  });
+  document.querySelectorAll('.step-tab').forEach((t, i) => {
+    t.classList.remove('active');
+    if (i === idx) t.classList.add('active');
+  });
+  currentSection = idx;
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextSection(from) { goTo(from + 1); }
+function prevSection(from) { goTo(from - 1); }
+function updateProgress() {
+  document.getElementById('progressBar').style.width = ((currentSection / 5) * 100) + '%';
+}
+
+// ─── API KEY ─────────────────────────────────────────────────────────────────
+function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (key.startsWith('sk-ant')) { apiKey = key; }
+  document.getElementById('apiModal').classList.add('hidden');
+}
+function skipApiKey() {
+  document.getElementById('apiModal').classList.add('hidden');
+}
+
+// ─── SUBMIT ───────────────────────────────────────────────────────────────────
+async function submitAssessment() {
+  goTo(5);
+  setTimeout(() => runAiAnalysis(), 600);
+}
+
+// ─── AI ANALYSIS ─────────────────────────────────────────────────────────────
+async function runAiAnalysis() {
+  const thinking = document.getElementById('aiThinking');
+  const result = document.getElementById('aiResult');
+
+  // Compute psych trait scores
+  const traitTotals = { con: [], agr: [], ope: [], stb: [], drv: [] };
+  Object.values(psychAnswers).forEach(a => traitTotals[a.trait].push(a.value));
+  const traitAvg = {};
+  Object.keys(traitTotals).forEach(t => {
+    const arr = traitTotals[t];
+    traitAvg[t] = arr.length ? Math.round((arr.reduce((a,b)=>a+b,0)/arr.length)*20) : 50;
+  });
+
+  const name = document.getElementById('p_name').value || 'Candidate';
+  const skillsText = Object.entries(ratings).map(([k,v]) => `${k.replace('r_','')}: ${v}/5`).join(', ');
+
+  if (!apiKey) {
+    // No API key — show basic result
+    thinking.style.display = 'none';
+    result.style.display = 'block';
+    const total = Math.round((traitAvg.con + traitAvg.agr + traitAvg.ope + traitAvg.stb + traitAvg.drv) / 5);
+    result.innerHTML = buildResultHTML(name, traitAvg, total, null);
+    return;
+  }
+
+  const prompt = `You are an expert talent evaluator for Founder X Co, a social media agency. Evaluate this Social Media Manager candidate based on their assessment responses. Be direct, specific, and actionable. Return ONLY valid JSON.
+
+CANDIDATE: ${name}
+EMAIL: ${document.getElementById('p_email').value}
+
+PLATFORM SKILLS (self-rated): ${skillsText}
+
+WORKFLOW DESCRIPTION: ${document.getElementById('s_workflow').value}
+
+BEST CONTENT EXAMPLE: ${document.getElementById('s_bestcontent').value}
+
+CLIPPING EXPERIENCE: ${document.getElementById('s_clipping').value}
+
+SCENARIO 1 (Low Views): ${document.getElementById('sc1').value}
+SCENARIO 2 (Viral Opportunity): ${document.getElementById('sc2').value}
+SCENARIO 3 (Team Conflict): ${document.getElementById('sc3').value}
+SCENARIO 4 (Data Interpretation): ${document.getElementById('sc4').value}
+
+PSYCH PROFILE (Big Five, 0-100 scale):
+- Conscientiousness: ${traitAvg.con}/100
+- Agreeableness: ${traitAvg.agr}/100
+- Openness: ${traitAvg.ope}/100
+- Emotional Stability: ${traitAvg.stb}/100
+- Drive: ${traitAvg.drv}/100
+
+MOTIVATION (Why this program): ${document.getElementById('v_why').value}
+BIGGEST FAILURE & LESSON: ${document.getElementById('v_failure').value}
+CLOSING PITCH: ${document.getElementById('v_pitch').value}
+
+Score the candidate on these 4 dimensions (0-25 each):
+1. content_experience: Portfolio quality, platform history, understanding of content mechanics
+2. technical_skills: Editing, analytics, tool proficiency, workflow sophistication
+3. problem_solving: Quality of scenario responses — specificity, strategic thinking, data literacy
+4. culture_fit: Motivation authenticity, resilience, coachability, growth mindset
+
+Return this exact JSON structure:
+{
+  "scores": {
+    "content_experience": <number 0-25>,
+    "technical_skills": <number 0-25>,
+    "problem_solving": <number 0-25>,
+    "culture_fit": <number 0-25>
+  },
+  "psych_summary": "<2-sentence summary of personality fit for this role>",
+  "strengths": ["<strength 1>", "<strength 2>", "<strength 3>"],
+  "growth_areas": ["<area 1>", "<area 2>"],
+  "verdict": "ACCEPT" | "HOLD" | "DECLINE",
+  "verdict_reason": "<2-3 sentence explanation of the verdict>",
+  "coaching_note": "<1 specific, actionable piece of advice for this candidate>"
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '{}';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const ai = JSON.parse(clean);
+
+    const total = (ai.scores.content_experience + ai.scores.technical_skills + ai.scores.problem_solving + ai.scores.culture_fit);
+
+    thinking.style.display = 'none';
+    result.style.display = 'block';
+    result.innerHTML = buildResultHTML(name, traitAvg, total, ai);
+
+    // Animate score bars
+    setTimeout(() => {
+      document.querySelectorAll('.s-fill').forEach(el => {
+        el.style.width = el.dataset.pct + '%';
+      });
+    }, 200);
+
+  } catch (err) {
+    thinking.style.display = 'none';
+    result.style.display = 'block';
+    result.innerHTML = `
+      <div style="color:var(--red);font-size:0.9rem;padding:1rem">
+        ⚠️ AI analysis failed (${err.message}). Check your API key and try again. Your submission was still recorded.
+      </div>`;
+  }
+}
+
+function buildResultHTML(name, traitAvg, total, ai) {
+  const verdictColors = { ACCEPT: '#DCFCE7', HOLD: '#FEF9C3', DECLINE: '#FEE2E2' };
+  const verdictText = { ACCEPT: '✅ Recommended for Onboarding', HOLD: '⏳ Hold — Needs More Info', DECLINE: '❌ Not a Fit at This Time' };
+  const verdict = ai ? ai.verdict : (total >= 70 ? 'ACCEPT' : total >= 50 ? 'HOLD' : 'DECLINE');
+  const verdictBg = verdictColors[verdict] || '#F3F4F6';
+
+  const scores = ai ? ai.scores : {
+    content_experience: Math.round(total*0.25), technical_skills: Math.round(total*0.25),
+    problem_solving: Math.round(total*0.25), culture_fit: Math.round(total*0.25)
+  };
+
+  return `
+    <div class="result-hero">
+      <div class="result-icon">🎯</div>
+      <h2>${name}</h2>
+      <p>Final Assessment Score</p>
+      <div class="result-total">${total}<span style="font-size:2rem;color:rgba(245,197,24,0.5)">/100</span></div>
+    </div>
+
+    <div class="score-grid">
+      ${[
+        ['Content Experience', scores.content_experience, 25, '#3B82F6'],
+        ['Technical Skills', scores.technical_skills, 25, '#8B5CF6'],
+        ['Problem Solving', scores.problem_solving, 25, '#F59E0B'],
+        ['Culture Fit', scores.culture_fit, 25, '#10B981']
+      ].map(([label, score, max, color]) => `
+        <div class="score-card">
+          <div class="s-label">${label}</div>
+          <div class="s-num" style="color:${color}">${score}<span style="font-size:1rem;color:var(--gray)">/${max}</span></div>
+          <div class="s-bar"><div class="s-fill" data-pct="${(score/max)*100}" style="background:${color};width:0%"></div></div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div style="margin-bottom:1rem">
+      <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-bottom:0.75rem">Psychological Profile</div>
+      <div class="score-grid">
+        ${[
+          ['Conscientiousness', traitAvg.con, '#1D4ED8'],
+          ['Agreeableness', traitAvg.agr, '#15803D'],
+          ['Openness', traitAvg.ope, '#7E22CE'],
+          ['Emotional Stability', traitAvg.stb, '#C2410C'],
+          ['Drive', traitAvg.drv, '#BE123C']
+        ].map(([label, score, color]) => `
+          <div class="score-card">
+            <div class="s-label">${label}</div>
+            <div class="s-num" style="color:${color}">${score}<span style="font-size:1rem;color:var(--gray)">/100</span></div>
+            <div class="s-bar"><div class="s-fill" data-pct="${score}" style="background:${color};width:0%"></div></div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="verdict-box" style="background:${verdictBg};border:1px solid ${verdict==='ACCEPT'?'#86EFAC':verdict==='HOLD'?'#FDE68A':'#FCA5A5'}">
+      <div style="font-weight:700;font-size:1.05rem;margin-bottom:0.5rem">${verdictText[verdict]}</div>
+      ${ai ? `<div class="ai-narrative">${ai.verdict_reason}</div>` : ''}
+    </div>
+
+    ${ai ? `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+      <div class="card" style="margin:0">
+        <div class="card-title" style="color:var(--green)"><span class="icon">💪</span> Strengths</div>
+        ${ai.strengths.map(s => `<div style="font-size:0.85rem;padding:0.4rem 0;border-bottom:1px solid var(--mid)">✓ ${s}</div>`).join('')}
+      </div>
+      <div class="card" style="margin:0">
+        <div class="card-title" style="color:var(--orange)"><span class="icon">🔧</span> Growth Areas</div>
+        ${ai.growth_areas.map(a => `<div style="font-size:0.85rem;padding:0.4rem 0;border-bottom:1px solid var(--mid)">→ ${a}</div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--light)">
+      <div class="card-title"><span class="icon">🎓</span> Coaching Note</div>
+      <div class="ai-narrative">${ai.coaching_note}</div>
+    </div>
+
+    <div class="card" style="margin-top:1rem">
+      <div class="card-title"><span class="icon">🧠</span> Personality Fit Summary</div>
+      <div class="ai-narrative">${ai.psych_summary}</div>
+    </div>
+    ` : '<div class="info-alert">Add an Anthropic API key at the start for detailed AI scoring and coaching notes.</div>'}
+  `;
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+buildRatings();
+buildPsychCard();
+buildLikert('lk_perf', 'perf');
+buildLikert('lk_commit', 'commit');
+buildLikert('lk_partner', 'partner');
+
+// Show API modal on load
+window.onload = () => {
+  setTimeout(() => document.getElementById('apiModal').classList.remove('hidden-start'), 300);
+};
+document.getElementById('apiModal').classList.remove('hidden');
+</script>
+</body>
+</html>
